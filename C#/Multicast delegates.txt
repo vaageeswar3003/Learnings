@@ -1,0 +1,30 @@
+Everything is same as delegates.
+If there are multiple methods with same signature as the delegate. Then we can execute all of them or the methods of our wish using this.
+
+For example
+============
+namespace MyNamespace {
+    public delegate void RectDelegate(double width, double height);
+
+    public class MyClass {
+        public void GetArea(double width, double height) {
+            Console.WriteLine("The area of the rectangle is "+(height*width));
+        }
+
+        public void GetPerimeter(double width, double height) {
+            Console.WriteLine("The perimeter of the rectangle is "+(2*(height+width)));
+        }
+
+        public static void main(String[] args) {
+            MyClass obj = new MyClass();
+            RectDelegate delegate = obj.GetArea;
+            delegate += obj.GetPerimeter;
+
+            obj.Invoke(10, 20);
+
+            // Output
+            The area of the rectangle is 200
+            The perimeter of the rectangle is 60 
+        }
+    }
+}

@@ -1,0 +1,5 @@
+1. Read the requirements properly.
+2. Check for the components which may be affected.
+3. Optimize the code.
+4. Refactor the code.
+5. Test it.

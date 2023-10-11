@@ -1,0 +1,8 @@
+GIT
+C#
+.NET Core
+Javascript
+Angular
+RxJs
+NgRx
+SQL

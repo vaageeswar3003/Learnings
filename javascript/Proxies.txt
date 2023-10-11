@@ -1,0 +1,46 @@
+A proxy in JavaScript is like a helper object that lets you control or change how basic operations work on another object, 
+such as reading or changing its properties. It's like having a guardian for an object that can modify or track what you do with it.
+
+Example
+--------
+
+const person = {
+  name: 'John',
+  age: 25,
+};
+
+const validator = {
+  // get: function(target, prop) -----> get(target, prop)
+  get: function(target, prop) {
+    console.log(`Getting property "${prop}"`);
+    // You can add custom logic for property access here
+    return target[prop];
+  },
+  // set: function(target, prop, value) -----> set(target, prop, value)
+  set: function(target, prop, value) {
+    console.log(`Setting property "${prop}" to "${value}"`);
+    if (prop === 'age') {
+      if (typeof value !== 'number' || value < 0) {
+        throw new Error('Age must be a positive number');
+      }
+    }
+    // If the age is valid, set the value
+    target[prop] = value;
+    return true;
+  },
+};
+
+const personProxy = new Proxy(person, validator);
+
+// Using the proxy to get and set properties
+console.log(personProxy.name); // Output: Getting property "name", John
+
+personProxy.age = 30; // Output: Setting property "age" to "30"
+console.log(personProxy.age); // Output: Getting property "age", 30
+
+// Trying to set an invalid age
+try {
+  personProxy.age = -5; // Throws an error: "Age must be a positive number"
+} catch (error) {
+  console.error(error.message);
+}

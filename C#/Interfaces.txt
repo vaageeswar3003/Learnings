@@ -1,0 +1,75 @@
+1. Interfaces are the user-defined types.
+2. These contains only the abstract methods.
+3. Interfaces do not contain fields.
+4. An Interface is by default public.
+5. The implementation class can directly define the interface methods without using override keyword.
+
+Methods in Interface
+====================
+1. A method is by default public and abstract.
+
+Implementing class
+==================
+1. A class which implements a particular interface must insert the public keyword before the function return type. Because the default
+access specifier for the the class members is private.
+2. Instead of inserting public keyword infront of the return type, we can just write
+[<return_type>] [<interface_name>.<method_name>] () { }
+
+Rules
+======
+1. An interface can inherit another interface.
+2. A direct instance to the interface cannot be created.
+3. But the interface can hold the reference of child instance. For ex: ITest obj = new ImplementationClass();
+3. The class which is implementing the interface (must) implement all the methods which are declared in the interface.
+4. A class can at a time inherit a class and implement the interface.
+
+Multiple inheritance
+====================
+1. In C# multiple inheritance is possible with the help of innterfaces.
+2. A class can implement multiple interfaces.
+3. If both the interfaces have same method declaration, then only a single implementation is enough to define the method.
+4. If the 2 methods need to different definition then we can do the following.
+For ex:
+=======
+public interface ITest {
+    void Add(int a, int b);
+}
+
+public interface ISample {
+    void Add(int a, int b);
+}
+
+namespace PlayGround
+{
+    public class Program : ITest, ISample
+    {
+        // If a single definition is enough
+        public void Add(int a, int b)
+        {
+            Console.WriteLine(a + b);
+        }
+
+        // If different definition is required, then we can define the method with interface name.
+        void ITest.Add(int a, int b)
+        {
+            Console.WriteLine(a + b + " of Test");
+        }
+
+        void ISample.Add(int a, int b)
+        {
+            Console.WriteLine(a + b + " of Sample");
+        }
+
+        public static void Main()
+        {
+            // To call the  different definition, we must use the Interface to hold the reference of the  instance.
+            ITest obj = new MyClass();
+            obj.Add(10, 20); // Output: 30 of Test
+            ISample obj1 = new MyClass();
+            obj1.Add(20, 20); // Output: 40 of Sample
+            Program obj3 = new Program();
+            obj3.Add(30, 30); // Output: 60
+        }
+    }
+}
+

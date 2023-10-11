@@ -1,0 +1,5 @@
+1. It is a mechanism of consuming the members of one class int another class by establishing parent/child realtionship between the classes.
+2. Mainly used for re-usability
+3. ":" operator is used to inherit a class
+4. The parent class must be accessible to the child class, Otherwise inheritance is not possbile.
+5. Parent class must be more accessible than the child class.

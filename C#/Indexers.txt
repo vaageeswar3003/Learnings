@@ -1,0 +1,36 @@
+In C#, an indexer is a special property of a class or struct that allows you to access elements or data within an object using array-like syntax. 
+Indexers are typically used to provide easy and convenient access to the elements of a collection or container class.
+
+Syntax
+-------
+public T this[K index]
+{
+    get
+    {
+        // Return the value at the specified index
+        if(index == so-and-so value) {
+            return something;
+        } else if(condition on index) {
+            return something;
+        }
+    }
+    set
+    {
+        if(index == so-and-so value) {
+            field = (typeCast)value;
+        }
+        // Set the value at the specified index
+    }
+}
+
+---> In the above syntax, T refers to the return type of indexer. the datatype of value field in setter is also same as T.
+---> Usually T is object. Because object can contain any type of data. And the reason is for choosing object is the class might contain
+     fields of different datatypes.
+---> Generally, the index is of type integer, but we can also declare string or other datatypes as indexes.
+---> The type of T is usually object.
+
+Example
+--------
+MyClass obj = new MyClass();
+obj[0] = 'test'
+Console.WriteLine(obj[0]);

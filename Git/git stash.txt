@@ -1,0 +1,98 @@
+For more about Git stash: https://www.atlassian.com/git/tutorials/saving-changes/git-stash
+
+git stash temporarily shelves (or stashes) changes you've made to your working copy so you can work on something else, 
+and then come back and re-apply them later on. Stashing is handy if you need to quickly switch context and work on something else, 
+but you're mid-way through a code change and aren't quite ready to commit.
+
+##### COMMAND 1 #####
+
+git stash
+
+The git stash command takes your uncommitted changes (both staged and unstaged), saves them away for later use, 
+and then reverts them from your working copy
+
+##### COMMAND 2 #####
+
+git stash pop
+
+--> You can reapply previously stashed changes with git stash pop
+
+--> Using this command will remove the latest stash and apply it to working copy.
+
+--> By default, git stash pop will re-apply the most recently created stash: stash@{0}
+
+--> You can choose which stash to re-apply by passing its identifier as the last argument
+
+--> for example: git stash pop stash@{2}
+
+##### COMMAND 3 #####
+
+git stash apply
+
+--> Unlike "git stash pop" this command will apply the changes to the working copy without removing it from stash.
+
+--> This command can also be used to apply a change to multiple branches.
+
+git stash apply stash@{0}
+
+--> To apply a particular stash
+
+########## IMPORTANT NOTE ##########
+
+--> By default Git won't stash changes made to untracked or ignored files.
+
+--> By running "git stash" will stash.
+	--> changes that have been added to index(Staged changes).
+      --> changes made to files that are currently tracked by git (Unstaged changes).
+--> But it will not stash.
+	--> new files in your working copy that have not yet been staged.
+	--> files that have been ignored
+	--> For ex: (If we add a file script.js, but if we do not run "git add <filename>", then while running git stash this file will not 	    be send to stash.
+##### COMMAND 4 #####
+
+git stash -u
+
+(or)
+
+git stash --include-untracked
+
+--> This command will stash the untracked files, unstaged and staged files.
+
+##### COMMADND 5 #####
+
+git stash -a 
+
+(or)
+
+git stash --all
+
+--> This command will stash the ignored files, untracked files, unstaged and staged files.
+
+########## Mangaging Multiple Stashes ##########
+
+##### COMMADND 6 #####
+
+git stash list
+
+--> We can create multiple stashes 
+--> By default stashes  are  identified as a "WIP"(Work in Progress)– on top of the branch and commit that you created the stash from.
+--> For ex: stash@{0}: WIP on main: 5002d47 our new homepage
+--> After a while it can be difficult to remember what each stash contains
+
+##### COMMAND 7 #####
+
+git stash save "description"
+
+--> To provide a bit more context, it's good practice to annotate your stashes with a description like in above command.
+
+##### COMMAND 8 #####
+
+git stash drop stash@{n}
+
+--> If you decide you no longer need a particular stash, you can delete it with above command.
+
+##### COMMAND 9 #####
+
+git stash clear
+
+--> The above command will clear all the stashes.

@@ -1,0 +1,16 @@
+In C# there are 5 access specifiers for class members
+======================================================
+1. public ---> Accessible from anywhere.
+2. protected ---> Accessible only from the child classes and within the class.
+3. internal ---> Accessible from any class either child or not, but only within the same project.
+4. internal protected ---> If from a class  the internal and protected members are accessible, then internal protected members are also 
+                           accessible. These methods can be accessed from child classes across all projects as well as the classes within
+                           the same project.
+5. private ---> These are only accessible  within the class.
+
+Access Specifiers for classes in C#
+===================================
+1. Classes in C# can only be public or internal. They cannot be private, protected or protected internal.
+2. The default scope for the class is internal.
+3. Classes which are public are accessible across all the projects.
+4. Classes are which are internal are only accessible within the same project in which the internal class is present.

@@ -1,0 +1,44 @@
+For more about git branch: https://www.atlassian.com/git/tutorials/using-branches
+
+git branch" maing deals with the branches of git repository.
+
+##### COMMAND 1 #####
+
+git branch -----> This command provides list of branches in the local repository.
+                  It is synonym command to git branch --list.
+
+##### COMMAND 2 #####
+
+git branch <branch_name> -----> This commmand is used to create a branch, but does not checkout the new branch.
+
+##### COMMAND 3 #####
+
+git branch -d <branch> -----> This command is used to delete a branch which is in local repository.
+                              This command will be executed only if the branch has no unmerged changes.
+
+##### COMMAND 4 #####
+
+git branch -D <branch> -----> This command is used to forcefully delete a local branch. It deletes the branch even if the branch has unmerged changes.
+
+##### COMMAND 5 #####
+
+git branch -m <branch> -----> This command is used to rename the branch.
+                              This command renames the branch which we are currently on.
+
+########## CREATING REMOTE BRANCHES ##########
+
+step-1 -----> A remote repo must first be configured and added to the local repo config.
+##### COMMAND 6 #####
+git remote add new-remote-repo https://bitbucket.com/user/repo.git
+
+step-2 -----> Create branch in remote repository
+##### COMMAND 7 #####
+git push <remote-name> <branch-name> 
+
+########## DELETING REMOTE BRANCHES ##########
+
+##### COMMAND 8 #####
+
+git push origin --delete <branch_name>
+(or)
+git push origin :<branch_name>

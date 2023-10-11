@@ -1,0 +1,47 @@
+KEYWORDS
+
+(i) ngModel ---> To declare a HTML element as a angular form control.
+(ii) name ---> It is a normal HTML attribute. But, it is used to access the Angular form control.
+(iii) ngSubmit ---> It is used for event binding. It is invoked when the submit button inside the for is clicked.
+(iv) ngModelGroup ---> It  is used to declare a group of angular controls  as a  separate control.
+(v) setValue() ---> This function is used to assign values to all declared controls in the angular form.
+                    This function works only when we assign values to all the controls present in the angular form.
+                        Syntax:
+                        (i) this.myForm.form.setValue({key:value})
+(vi) patchValue() ---> This function similar to the setValue function.
+                       Unlike the setValue function this is used to assign values for one or more form controls.
+                       Syntax:
+                        (i) this.myForm.form.patchValue({key:value})
+(vii) getting value of form control ---> this.myForm.value.controlName
+(viii) reset form ---> this.myForm.reset();
+
+Example: 1 
+------------
+app.HTML
+------------
+
+<form #f="ngForm" (ngSubmit)="onFormSubmit(f)">
+....
+</form>
+
+##############
+
+Example: 2
+------------
+app.HTML
+------------
+
+<form #f>
+...
+</form>
+
+app.ts
+------------
+@ViewChild('f') f: NgForm
+
+onValueChange() {
+    // Using reference of NgForm
+}
+
+(ix) One important advantage of using viewchild is we can access the angular form not only while submitting it,
+     but also during other event like onChange(), onClick() etc,.

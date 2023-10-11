@@ -1,0 +1,28 @@
+In C#, properties are a way to encapsulate the access to the fields or data members of a class.
+They allow you to provide controlled and managed access to the internal state of a class while abstracting away the implementation details. 
+Properties are similar to fields but provide methods (getters and setters) that allow you to read and write the values of the fields while
+enforcing encapsulation.
+
+Syntax
+-------
+access_modifier type PropertyName
+{
+    get
+    {
+        // Get accessor logic
+        return someValue;
+    }
+    set
+    {
+        // Set accessor logic
+        someValue = value;
+    }
+}
+
+---> value is the keyword.
+
+Example
+-------
+
+Console.WriteLine(MyClass.PropertyName);
+MyClass.PropertyName = 'test';

@@ -1,0 +1,16 @@
+It is nothing but a short hand notation of anonymous method.
+It will automatically recongnize the parameter type as we do not specify it. It works even if we specify the parameter type.
+"=>" is known as lambda operator.
+
+For example
+============
+
+public delegate void MyDelegate(string message);
+
+// if the method does not require any parameter, then we can write delgate {}
+
+MyDelegate delegate = (message) => {
+    Console.WriteLine($"Received message {message}");
+}
+
+delegate.Invoke("Starting the  journey");

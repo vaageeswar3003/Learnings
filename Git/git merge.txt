@@ -1,0 +1,20 @@
+For more about Git merge: https://www.atlassian.com/git/tutorials/using-branches/git-merge
+
+"Git merge" will merge the code of source branch into the target branch.
+
+For ex:  Initially we have main branch in the repository, later to develop a new feature we have created feature1 branch from main branch.
+         Now, few commits were made in the feature1 branch and is ready to merge. 
+         To complete this process, first we need to checkout to the main branch which is also the destination branch in this case. 
+         Later, we need to give the command "git merge <source_branch_name>". 
+         Now, we have the code of source branch in the current branch.
+
+There are 2 types of merge.
+     1. Fast forward merge
+     2. Recursive merge
+
+Fast forward merge
+     -> If the destination  branch has no commits after the source branch is created, then the HEAD of destination branch will be moved to the HEAD position of source 
+        branch.
+Recursive merge
+     -> If the destination branch has made some commits after the source branch is created, then the prompt asks to create a new commit, so that the HEAD of source and
+        destination branches will point to the new commit created.

@@ -1,0 +1,14 @@
+It is  same as delegate, but we assign anonymous method.
+
+For example
+============
+
+public delegate void MyDelegate(string message);
+
+// if the method does not require any parameter, then we can write delgate {}
+
+MyDelegate delegate = delegate(string message) {
+    Console.WriteLine($"Received message {message}");
+}
+
+delegate.Invoke("Starting the  journey");

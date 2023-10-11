@@ -1,0 +1,61 @@
+In C#, an event is a way to provide notifications to clients (or subscribers) when something significant happens. 
+It's like saying, "Hey, this noteworthy thing just occurred, and anyone interested, listen up!"
+
+Step-1: Declare the Event
+==========================
+public class Conference
+{
+    // Declare the event using the 'event' keyword
+    public event EventHandler<ConferenceEventArgs> OnConferenceStarted;
+
+    // Other class members...
+}
+
+Step-2: Create EventArgs (Event Arguments)
+==========================================
+public class ConferenceEventArgs : EventArgs
+{
+    public string Message { get; set; }
+
+    public ConferenceEventArgs(string message)
+    {
+        Message = message;
+    }
+}
+
+Step-3: Trigger the Event
+==========================
+
+public class Conference
+{
+    // Declare the event
+    public event EventHandler<ConferenceEventArgs> OnConferenceStarted;
+
+    // Method to start the conference
+    public void StartConference()
+    {
+        Console.WriteLine("Conference is starting...");
+
+        // Trigger the event
+        OnConferenceStarted?.Invoke(this, new ConferenceEventArgs("Conference has started!"));
+    }
+}
+
+Step-4: Subscribe to the Event
+===============================
+public class Attendee
+{
+    public void Subscribe(Conference conference)
+    {
+        // Subscribe to the event by adding an event handler
+        conference.OnConferenceStarted += HandleConferenceStarted;
+    }
+
+    // Event handler method
+    private void HandleConferenceStarted(object sender, ConferenceEventArgs e)
+    {
+        Console.WriteLine($"Received notification: {e.Message}");
+        // Do something in response to the event
+    }
+}
+

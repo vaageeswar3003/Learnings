@@ -1,0 +1,41 @@
+Delegate
+========
+1. Delegate are reference to the methods in C#.
+2. It is a type safe function pointer.
+
+---> To call a method using delegates we need to follow 3 steps.
+1. Define a delegate
+   [modifier] delegate void|type <Name>([parameter_list])  
+
+2. Assign reference of the method to delegate.(Instantiating the delegate)
+    Delegate_Name delegate_instance = new Delegate_Name(method);
+
+3. Execute the delegate
+   delegate_instance([parameter_list]);
+   ---> we can also do the same with Invoke method
+   delegate_instance.Invoke([parameter_list]);
+
+For example
+============
+
+namespace ConsolePlayGround
+{
+    public delegate void NotificationDelegate(string message);
+    internal class DelegatesExample
+    {
+        public void PrintMessage(string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        public static void Main(String[] args)
+        {
+            DelegatesExample obj = new DelegatesExample();
+            NotificationDelegate notificationDelegate = obj.PrintMessage;
+            // We can also assign the reference of the method like following ---> NotificationDelegate notificationDelegate = new NotificationDelegate(obj.PrintMessage);
+            notificationDelegate("This is just the beginning");
+        }
+    }
+}
+
+
