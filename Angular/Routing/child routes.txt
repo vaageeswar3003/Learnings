@@ -1,0 +1,11 @@
+app-routing.module.ts
+=====================
+
+const routes: Routes = [{
+    path: 'user',
+    component: UserComponent,
+    children: [{
+        path: 'user-details',
+        component: UserDetailsComponent
+    }]
+}]

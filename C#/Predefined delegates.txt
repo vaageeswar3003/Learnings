@@ -1,0 +1,30 @@
+There are 3 predefined delegates in C#.
+1. Func
+========
+--> This delegate is used to hold the reference of the methods which  take parameters  as well as has a return type.
+
+Example:
+Func<int, float, double, double> obj1 = (x, y, z) => x+y+z;
+double result = obj1.Invoke(100, 34.f, 193.465);
+
+Example:
+Func<int, int > obj2 = (x) => x*10;
+obj2.Invoke(10);
+
+2. Action
+==========
+--> This type of delegate is used to hold the reference of the methods which do not take parameters and has a return type.
+
+3. Predicate
+=============
+--> This delegate is used to hold the reference of the methods which take single parameter and returns a boolean value.
+
+Example:
+Predicate<string> obj3 = (str) => {
+    if(str.Length > 5) {
+        return true;
+    } else {
+        return false;
+    }
+} 
+bool result = obj3.Invoke("Testing");

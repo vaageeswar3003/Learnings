@@ -1,0 +1,12 @@
+const routes: Routes [{
+    path: '/users',
+    component: UsersComponent
+}]
+
+@NgModule({
+imports: [RouterModule.forRoot(routes)],
+exports: [RouterMoudle]
+})
+
+export class AppRoutingModule { }
+

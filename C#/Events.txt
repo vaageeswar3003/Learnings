@@ -38,6 +38,7 @@ public class Conference
 
         // Trigger the event
         OnConferenceStarted?.Invoke(this, new ConferenceEventArgs("Conference has started!"));
+        // ? is used to call the Invoke function only when OnConferenceStarted is not null.
     }
 }
 

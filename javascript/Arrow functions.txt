@@ -1,0 +1,2 @@
+These  type of functions are introduced  in ES6.
+we do not use function keyword  to define a functions.

@@ -1,0 +1,10 @@
+--> In anchor tags href property is used to navigate to other url. But this is not perfomance friendly as it reloads the entire application.
+--> To maintain the perfommance, we use routerLink property from angular. So, that it will not reload the page and maintain the single page
+    application feature of angular.
+Example
+=======
+
+1. <a routerLink="/user">User</a>
+2. <a [routerLink=]"'/user','users'">Users</a> /* /user/users */
+3. <a routerLink="/Categories">Categories</a>
+    

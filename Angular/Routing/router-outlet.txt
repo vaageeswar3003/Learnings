@@ -1,0 +1,3 @@
+To mention angular what component to be displayed, we use router-outlet directive
+<router-outlet>
+Wherever this directive is placed, in that place the corresponding component of the current route will displayed.

@@ -1,0 +1,31 @@
+Template approach
+=================
+<a [routerLink]="['/users',1,'leela']" [queryParams]="{page:1,search:'Leela'}" [fragments]="'load'"></a>
+// The url will be --> http://localhost:4200/users/1/leela?page=1&search=leela#loading
+
+Programatic approach
+====================
+
+onNavigate() {
+    this.router.navigate(['/users',1,'leela'], {
+        queryParams: {page:1,search:'Leela'},
+        fragemts: 'Loading'
+    })
+}
+
+Retrieving query params and fragments 
+=====================================
+this.route.snapshot.queryParams;
+this.route.snapshot.fragments;
+
+Retrieving query params and fragments dynamically
+=================================================
+
+ngOnInit() {
+    this.route.queryParams.subscribe((data) => {
+        console.log(data);
+    })
+    this.route.fragments.subscribe((data) => {
+        console.log(data);
+    })
+}

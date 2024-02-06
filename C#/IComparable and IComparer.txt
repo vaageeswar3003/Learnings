@@ -1,0 +1,76 @@
+In C# collections, when we create a list of custom class instances. For ex: List<Student> class; We cannot use sort() method directly.
+We will get an error if use sort method if we do not override CompareTo method by IComparable or do not provide an instance of IComparer
+to the sort method.
+
+Solution 1: Overriding the CompareTo method by implementing the IComparable interface to the custom class
+=========================================================================================================
+Class Student: IComparable<Student> {
+    public int Sid {get; set;}
+    public string Name {get; set;}
+    public int Marks {get; set;}
+
+    public int CompareTo(Student other) {
+
+        // The below logic will sort the  instances in ascending order
+        if(this.Sid > other.Sid) {
+            return 1;
+        } else if(this.Sid < other.Sid) {
+            return -1;
+        } else {
+            return 0;
+        }
+
+        // The below logic will sort the  instances in descending order
+        if(this.Sid > other.Sid) {
+            return -1;
+        } else if(this.Sid < other.Sid) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+public static Main() {
+    List<Student> Students = list of student instances;
+    Students.Sort();
+}
+
+Solution 2: Passing the instance of IComparer to the sort method
+=================================================================
+In some scenarios we will not have access to the custom class to override the CompareTo method from IComparable.
+In this case, we can create a custom class which implements IComparer and override the  Compare method.
+
+Class CompareStudents: IComparer<Student>
+{
+    public int Compare(Student x, Student y) {
+        // The following logic will sort instances in ascending order
+        if(x.Sid > y.Sid) {
+            return 1;
+        } else if(x.Sid < y.Sid) {
+            return -1;
+        } else {
+            return 0;
+        }
+
+        // The following logic will sort instances in descending order
+        if(x.Sid > y.Sid) {
+            return -1;
+        } else if(x.Sid < y.Sid) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public static Main() {
+        List<Student> Students = list of student instances;
+        CompareStudent obj = new CompareStudent();
+        Students.Sort(obj);
+    }
+}
+
+Note
+====
+The CompareTo method has only 1 parameter because the other instance is calling the object. So, we can use this.
+Whereas, in Compare method there is no instance calling the object. So, there are 2 parameters.

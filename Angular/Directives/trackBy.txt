@@ -1,0 +1,35 @@
+--> In *ngFor structural directive, whenever we change the reference of the array, the DOM will re-render.
+--> But, if the data in array is very huge then it will impact the UI response.
+--> To handle this situation Angualar has introduced trackBy feature, which helps to track the previous elements. So, that whenver the array
+    is updated, then only the DOM of new elements will be updated instead of entire DOM.
+
+Example
+=======
+
+app.component.html
+------------------
+
+<div *ngFor="let employee of employees; trackBy: refreshEmployees"></div>
+<button (click)="onAddEmployee()"> 
+
+app.component.ts
+----------------
+
+ngOnInit() {
+    this.employees = [{id:1,name:'Raju'},{id:2,name:'Ravi'}];
+}
+
+onAddEmployee() {
+    this.employees = [...this.employees, {id: 3,name: 'Rahul'}];
+}
+
+refreshEmployees(index: number, employee: any | IEmployee): number {
+    return employee.id;
+}
+
+Explanation
+===========
+
+--> refreshEmployees() is the function that is passed to trackBy. This function takes to parameters.
+1. index 2. The object
+--> It returns the unique key of the object.

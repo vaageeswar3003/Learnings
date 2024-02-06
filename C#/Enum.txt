@@ -1,0 +1,32 @@
+Enum is user defined data type
+It is better to decalre it under a namespace rather than a class
+Enum stands for enumeration
+Enums are constants which holds integers or string values.
+It is a value type data type. That means unlike class in C# it is not reference type.
+Structures in C# are also value type data type.
+
+Syntax
+=======
+
+[<Modifier>] enum <Name> : <type>
+{
+    // List of named constant values
+}
+
+--> By default type is "int"
+namespace example {
+    enum Days {
+        Monday, Tuesday, Wednesday, Thursday, Friday
+    }
+    class Test {
+        public static void Main() {
+            Days d = 0;
+            Days d1 = (Days)1;
+            int thursdayAsInt = (int)Days.Thursday;
+            Console.WriteLine(d+" "+d1+" "+thursdayAsInt); // Output --> Monday Tuesday 3
+        }
+    }
+}
+
+--> The reason for type casting is only 0 index can be recognized.
+

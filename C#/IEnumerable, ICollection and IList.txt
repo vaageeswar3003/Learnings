@@ -1,0 +1,13 @@
+IEnumerable
+===========
+It is only used to iterate through the list of values retrieved from the database.
+
+ICollection
+===========
+It is implemented from the IEnumerable interface.
+It has the ability to add and remove the objects.
+
+IList
+=====
+It implements both IEnumberable and ICollection interfaces.
+It has the ability to add an object at specific index or remove an item from specific index.

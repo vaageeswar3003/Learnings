@@ -1,0 +1,25 @@
+CanActivate
+===========
+CanActivate is used when a route and its child routes need to be protected based on validation like authentication.
+
+CanActivateChild
+================
+CanActivateChild is used when only child routes need to be protected, in this case we can access parent route withoud validation.
+
+Example
+=======
+
+const routes: Routes = [{
+    path: '/users',
+    canActivate: [AuthGuard],
+    component: UsersComponent
+},
+{
+    path: '/categories',
+    canActivateChild: [ChildAuthGuard],
+    component: CategoriesComponent,
+    children: [{
+        path: 'details',
+        component: DetialsComponent
+    }]
+}]

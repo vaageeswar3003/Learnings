@@ -1,0 +1,155 @@
+--> Cors stands for Cross origin resource sharing.
+--> Basically, when an API is running, then only applications which are running on the same port as that of API can access the endpoints.
+--> But, in most of the cases UI an API will be on 2 different ports. In this case CORS error occurs.
+--> By default same origin policy will be in action. Which only accepts requests from the application running on same port.
+--> To overcome this error, We can configure the Cors policy and use it in .NET core.
+
+Types of Cors policies
+=======================
+There are 2 types of Cors policies. They are:
+1. Default policy
+2. Named policy
+
+Default policy
+==============
+builder.Services.AddCors(options => {
+    options.AddDefaultPolicy(policy => {
+        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+    })
+})
+
+Named policy
+============
+builder.Services.AddCors(options => {
+    options.AddPolicy("Policy1", policy => {
+        policy.AllowAnyOrigin().AllowAnyHeader();
+    })
+})
+
+Using the policy
+================
+app.UseCors(); ----> For using default policy
+app.UseCors("Policy1"); --> For using named policy
+
+Note --> We cannot use cors anywhere as we want. It should be placed as per .NET middleware order. 
+
+Enabling CORS with endpoint routing
+===================================
+Using this method we can configure cors in per endpoint approach.
+
+Program.cs
+----------
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://example.com",
+                                              "http://www.contoso.com");
+                      });
+});
+
+builder.Services.AddControllers();
+builder.Services.AddRazorPages();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+
+app.UseCors();
+
+app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapGet("/echo",
+        context => context.Response.WriteAsync("echo"))
+        .RequireCors(MyAllowSpecificOrigins);
+
+    endpoints.MapControllers()
+             .RequireCors(MyAllowSpecificOrigins);
+
+    endpoints.MapGet("/echo2",
+        context => context.Response.WriteAsync("echo2"));
+
+    endpoints.MapRazorPages();
+});
+
+app.Run();
+
+In the preceding code:
+
+app.UseCors enables the CORS middleware. Because a default policy hasn't been configured, app.UseCors() alone doesn't enable CORS.
+The /echo and controller endpoints allow cross-origin requests using the specified policy.
+The /echo2 and Razor Pages endpoints do not allow cross-origin requests because no default policy was specified.
+The [DisableCors] attribute does not disable CORS that has been enabled by endpoint routing with RequireCors.
+
+
+Enable CORS with attributes
+===========================
+
+Enabling CORS with the [EnableCors] attribute and applying a named policy to only those endpoints that require CORS provides the finest control.
+
+The [EnableCors] attribute provides an alternative to applying CORS globally. The [EnableCors] attribute enables CORS for selected endpoints, rather than all endpoints:
+
+[EnableCors] specifies the default policy.
+[EnableCors("{Policy String}")] specifies a named policy.
+The [EnableCors] attribute can be applied to:
+
+Razor Page PageModel
+Controller
+Controller action method
+
+Disable CORS
+============
+The [DisableCors] attribute does not disable CORS that has been enabled by endpoint routing.
+
+The following code defines the CORS policy "MyPolicy":
+
+Controller.cs
+-------------
+[EnableCors("MyPolicy")]
+[Route("api/[controller]")]
+[ApiController]
+public class ValuesController : ControllerBase
+{
+    // GET api/values
+    [HttpGet]
+    public IActionResult Get() =>
+        ControllerContext.MyDisplayRouteInfo();
+
+    // GET api/values/5
+    [HttpGet("{id}")]
+    public IActionResult Get(int id) =>
+        ControllerContext.MyDisplayRouteInfo(id);
+
+    // PUT api/values/5
+    [HttpPut("{id}")]
+    public IActionResult Put(int id) =>
+        ControllerContext.MyDisplayRouteInfo(id);
+
+
+    // GET: api/values/GetValues2
+    [DisableCors]
+    [HttpGet("{action}")]
+    public IActionResult GetValues2() =>
+        ControllerContext.MyDisplayRouteInfo();
+
+}
+
+CORS policy options
+===================
+This section describes the various options that can be set in a CORS policy:
+
+Set the allowed origins
+Set the allowed HTTP methods
+Set the allowed request headers
+Set the exposed response headers
+Credentials in cross-origin requests
+Set the preflight expiration time

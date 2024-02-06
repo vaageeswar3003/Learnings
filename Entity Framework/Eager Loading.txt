@@ -1,0 +1,135 @@
+Eager loading is one of the way for loading related data in ef core.
+Eager loading is a technique used to load related entities along with the main entity being queried in a single database round trip.
+
+
+Implementation
+==============
+Eager loading can be implemented in EFCore using Include or ThenInclude method.
+
+Example
+========
+
+Employee.cs
+-----------
+public class Employee {
+    public int EmployeeId {get; set;} // Primary Key
+    public string FirstName {get; set;}
+    public string LastName {get; set;}
+    public long Salary {get; set;}
+
+    public EmployeeDetails EmployeeDetails {get; set;} // Reference navigation to dependent
+}
+
+EmployeeDetails.cs
+------------------
+public class EmployeeDetails {
+    public int Id {get; set;}
+    public string Address {get; set;}
+    public string PhoneNumber {get; set;}
+    public string Emails {get; set;}   
+    public int EmployeeId {get; set;} // Foreign Key
+    public Employee Employee {get; set;} // Reference navigation property
+}
+
+1. Without Include or ThenInclude method.
+----------------------------------------
+
+var employees = context.Employess.ToList();
+for(var employeee of employees) {
+    Console.WriteLine(employee.EmployeeDetails.EmployeeId+" "+employee.FirstName+" "+employee.EmployeeDetails.Address);
+}
+
+// The above code give an error because "EmployeeDetails" property is null and does not have any data.
+// To resolve this issue we need to use Include method.
+
+var employees = context.Employess.Include(e => e.EmployeeDetails).ToList();
+for(var employeee of employees) {
+    Console.WriteLine(employee.EmployeeDetails.EmployeeId+" "+employee.FirstName+" "+employee.EmployeeDetails.Address);
+}
+
+
+2. With ThenInclude method
+--------------------------
+Additionally, we can use the ThenInclude method to include deeper levels of related data. 
+For example, if Book has a related entity like Publisher, you can include it as follows:
+
+Author.cs
+---------
+
+public class Author
+{
+    public int AuthorId { get; set; }
+    public string Name { get; set; }
+    public List<Book> Books { get; set; }
+}
+
+Book.cs
+-------
+
+public class Book
+{
+    public int BookId { get; set; }
+    public string Title { get; set; }
+    public int AuthorId { get; set; }
+    public Author Author { get; set; }
+    public int PublisherId { get; set; }
+    public Publisher Publisher { get; set; }
+}
+
+Publsiher.cs
+------------
+
+public class Publisher
+{
+    public int PublisherId { get; set; }
+    public string Name { get; set; }
+}
+
+var authorsWithBooksAndPublishers = context.Authors
+    .Include(a => a.Books)                 // Include books for each author
+        .ThenInclude(b => b.Publisher)     // Then include the publisher for each book
+    .ToList();
+
+    
+Certainly! In the second example, I'll explain how to use the Include method along with the ThenInclude method in Entity Framework Core to perform deeper levels of eager loading.
+
+Let's assume you have three entities: Author, Book, and Publisher, where an author can have multiple books, and each book is associated with a publisher.
+
+csharp
+Copy code
+public class Author
+{
+    public int AuthorId { get; set; }
+    public string Name { get; set; }
+    public List<Book> Books { get; set; }
+}
+
+public class Book
+{
+    public int BookId { get; set; }
+    public string Title { get; set; }
+    public int AuthorId { get; set; }
+    public Author Author { get; set; }
+    public int PublisherId { get; set; }
+    public Publisher Publisher { get; set; }
+}
+
+public class Publisher
+{
+    public int PublisherId { get; set; }
+    public string Name { get; set; }
+}
+Now, let's say you want to retrieve a list of authors along with their books and the associated publishers for each book. Here's how you can do it using Include and ThenInclude:
+
+csharp
+Copy code
+var authorsWithBooksAndPublishers = context.Authors
+    .Include(a => a.Books)                 // Include books for each author
+        .ThenInclude(b => b.Publisher)     // Then include the publisher for each book
+    .ToList();
+In this example:
+
+The Include(a => a.Books) statement loads the Books collection for each Author.
+
+The ThenInclude(b => b.Publisher) statement further loads the Publisher for each Book. 
+This is possible because the Books collection in the Author entity has been included in the previous step.

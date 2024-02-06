@@ -1,0 +1,8 @@
+strict mode in javascript can be availed by using the following directive
+---> "use  strict"
+If the above directive is  placed at the top of the entire script then the entire script will be evaluated in strict mode.
+If the directive is placed witin a fucntion, then only the code within the fucntion  will be evaluated in strict mode.
+
+Note
+=====
+"use strict" directive must be placed only at the top of script or the function 

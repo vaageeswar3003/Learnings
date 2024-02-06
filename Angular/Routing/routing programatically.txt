@@ -1,0 +1,35 @@
+app-routing.module.ts
+=====================
+export class AppRoutingModule {
+    const routes: Routes [{
+        path: 'users/:id/:name',
+        component: UsersComponent
+    },
+    {
+        path: 'categories',
+        component: CategoriesComponent 
+    }
+    ]
+}
+
+test.component.ts
+=================
+
+export class Test {
+    constructor(private router: Router, private route: ActivatedRoute) {
+        this.route.snapshot.param['id']; \\ This line will retrieve the id parameter from the url only for the first time when the component is loaded.
+        this.route.snapshot.param['name']; \\ This line will retrieve the name parameter from the url only for the first time when the component is loaded.
+        this.route.params.subscribe((data) => {
+            console.log(data['id']); \\ This line will execute and fetch id paramater from route whenever the id parameter in route changes
+            console.log(data['name']); \\ This line will execute and fetch name paramater from route whenever the name parameter in route changes
+        })
+    }
+
+    onNavigateToUsers() {
+        this.router.navigate(['/user',1,'Rama']);
+    }
+
+    onNavigateToCategories() {
+        this.router.navigateByUrl('/categories',2,'Krishna');
+    }
+}

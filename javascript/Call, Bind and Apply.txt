@@ -1,0 +1,38 @@
+Call
+=====
+Syntax
+-------
+call(reference, ...args): <returns void>
+--> args are comma separated while passing the parameters
+
+Bind
+=====
+Syntax
+-------
+bind(reference, ...args): <returns reference of the function called>
+
+
+Apply
+=====
+Syntax
+-------
+call(reference, argumentList[]): <returns void>
+--> argumentList is array of parameters that need to be passed to the function
+
+Example
+========
+
+function sayGreetings(city, state) {
+    console.log('Hi '+this.name+' of '+city+','+state);
+}
+
+let obj = {name: 'Vaageeswar'};
+sayGreetings.call(obj, 'Hyderabad', 'Telangana'); // Output --> Hi Vaageeswar of Hyderabad, Telangana
+
+sayGreetings.bind(obj, 'Hyderabad', 'Telangana'); // Output --> This does not give an output as the bind methods will not execute 
+                                                  // but it return reference of the method called
+let functionReference = sayGreetings.bind(obj, 'Hyderabad', 'Telangana');
+functionReference(); // Output --> Hi Vaageeswar of Hyderabad, Telangana
+
+sayGreetings.apply(obj, ['Hyderabad', 'Telangana']); // Output --> Hi Vaageeswar of Hyderabad, Telangana
+

@@ -1,0 +1,13 @@
+We can preserve the existing query params and pass it to the next URL, or we can append additional query params to the existing query
+params.
+
+Example
+=======
+
+// Template approach
+<a [routerLink]="['/users']" [queryParamsHandling]="'merge'"></a>
+
+// Programatic approach
+onNavigate() {
+    this.route.navigate(['/users'], {queryParamsHandling: 'preserve'});
+}
