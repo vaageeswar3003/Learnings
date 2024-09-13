@@ -1,0 +1,56 @@
+There are 4 overloads for Sort() method.
+
+1. Sort()
+=========
+This is a default sorting mechanism for simple types like Integer, Float etc,.
+We can also override this mechanism by implementing the ICompartor to the type class.
+
+2. Sort(Comparison<T> comparison)
+=================================
+This  overload takes a delegate which takes 2 parameters of the Type of Collection and return an integer value.
+
+1. Example with anonymous method
+------------------------------
+namespace Test {
+    public class Students {
+        public static void main()
+ {
+    List<String> l = new ArrayList<String>();
+    l.add("Ramu");
+    l.add("Kamal");
+    l.add("Akash");
+    l.Sort((a, b) => {
+        return a.CompareTo(b);
+    })
+ }    }
+}
+
+2. Example with delegate
+------------------------
+namespace Test {
+    public class Students {
+        public int CompareNames(String a, String b) {
+            return a.CompareTo(b);
+        }
+        public static void main()
+        {
+            List<String> l = new ArrayList<String>();
+            l.add("Ramu");
+            l.add("Kamal");
+            l.add("Akash");
+            Comparison<String> obj = new Comparison<String>(CompareNames);
+            l.Sort(obj);
+            // We can also pass the CompareNames() method directly to the sort method directly provided it matches the signature of the Comparison
+            // delegate, so that C# creates a delegate internally.
+        }    
+    }
+}
+
+3. Sort(IComparer<T> comparer)
+==============================
+This overload helps in sorting the elements using custom logic by passing the object of the class which implements IComparer interface.
+
+4. Sort(int index, int count, IComparer<T> comparer)
+====================================================
+This overload helps in specifying from which index position the sorting should start and how many elements from the specified index must
+be sorted.

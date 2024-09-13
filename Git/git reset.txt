@@ -1,0 +1,28 @@
+Purpose
+=======
+git reset is used to undo changes by resetting the current state of the HEAD to a specified state. 
+
+Types of Resets
+===============
+Soft
+----
+Moves the HEAD to the specified commit but leaves the staging area and working directory untouched.
+
+Mixed
+-----
+Moves the HEAD to the specified commit and updates the staging area to match the commit, 
+but leaves the working directory untouched.
+
+Hard
+----
+ Moves the HEAD to the specified commit and updates both the staging area and 
+ working directory to match the commit.
+
+ Command 1
+ =========
+ git reset --<type> <commit>
+
+ Command 2
+ =========
+ git reset --<type> HEAD~2
+ --> Here 2 represents the number of commits to be removed starting from HEAD

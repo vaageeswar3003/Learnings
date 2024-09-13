@@ -25,7 +25,7 @@ Rules
 
 Multiple inheritance
 ====================
-1. In C# multiple inheritance is possible with the help of innterfaces.
+1. In C# multiple inheritance is possible with the help of interfaces.
 2. A class can implement multiple interfaces.
 3. If both the interfaces have same method declaration, then only a single implementation is enough to define the method.
 4. If the 2 methods need to different definition then we can do the following.

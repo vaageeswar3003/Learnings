@@ -121,8 +121,6 @@ public class Publisher
 }
 Now, let's say you want to retrieve a list of authors along with their books and the associated publishers for each book. Here's how you can do it using Include and ThenInclude:
 
-csharp
-Copy code
 var authorsWithBooksAndPublishers = context.Authors
     .Include(a => a.Books)                 // Include books for each author
         .ThenInclude(b => b.Publisher)     // Then include the publisher for each book

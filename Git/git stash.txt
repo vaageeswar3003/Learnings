@@ -34,8 +34,12 @@ git stash apply
 --> This command can also be used to apply a change to multiple branches.
 
 git stash apply stash@{0}
+		(or)
+git stash apply 0
 
 --> To apply a particular stash
+
+
 
 ########## IMPORTANT NOTE ##########
 

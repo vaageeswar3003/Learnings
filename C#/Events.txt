@@ -46,7 +46,7 @@ Step-4: Subscribe to the Event
 ===============================
 public class Attendee
 {
-    public void Subscribe(Conference conference)
+    public Attendee(Conference conference)
     {
         // Subscribe to the event by adding an event handler
         conference.OnConferenceStarted += HandleConferenceStarted;

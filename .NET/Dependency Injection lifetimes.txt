@@ -1,0 +1,15 @@
+Transient
+=========
+Transient objects are created each time they are requested.
+This means that if a Transient is injected into multiple consumers, each consumer will receive a separate instance of the object.
+
+Scoped
+======
+Scoped objects are created once per request.
+This means that if a Scoped is injected into multiple consumers within the same request, they will all receive the same instance of this object.
+However, if the object is injected into multiple consumers in different requests, each request will receive its own instance of the object.
+
+Singleton
+=========
+Singleton objects are created the first time they are requested, and the same instance is used for all subsequent requests.
+This can be useful if you want to ensure that all consumers of a service are using the same instance of the object.

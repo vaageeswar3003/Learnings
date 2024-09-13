@@ -1,0 +1,34 @@
+"?." --> is called optional chaining;
+Accessing a property of a JS object which is null will throw an error and stops the execution.
+To avoid this scenario, we use optional chainning operator on the property of JS object to return undefined if the property does not exist.
+
+Example
+=======
+
+var a = {
+    name: 'Raju'
+}
+
+console.log(a.address.street) // error
+console.log(a.address?.street) // undefined;
+
+Important points
+================
+1. The variable must be declared (e.g. let/const/var user or as a function parameter). 
+   The optional chaining works only for declared variables.
+
+2. We can use ?. for safe reading and deleting, but not writing
+
+The optional chaining ?. has no use on the left side of an assignment.
+
+For example:
+------------
+
+let user = null;
+user?.name = "John"; // Error, doesn't work
+// because it evaluates to: undefined = "John"
+
+Other variants: ?.(), ?.[]
+==========================
+1. ?.() is used to call a function that may not exist.
+2. The ?.[] syntax also works, if we’d like to use brackets [] to access properties instead of dot "." alert( user2?.[key] );
