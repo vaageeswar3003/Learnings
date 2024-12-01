@@ -1,0 +1,3 @@
+Variables can be declared using let and var.
+Constants can be created using const.
+variables used to be declared using var in older scripts.

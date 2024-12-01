@@ -1,3 +1,8 @@
+Note
+====
+Every function can be invoked using call, bind and apply.
+
+
 Call
 =====
 Syntax

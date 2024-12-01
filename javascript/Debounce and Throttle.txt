@@ -1,0 +1,142 @@
+Debounce
+===========
+Definition:
+-----------
+A technique to ensure a function is invoked only after a specified amount of time has passed since the last call.
+
+Purpose: 
+---------
+To limit the number of times a function is executed for events that trigger frequently, such as resizing, scrolling, or typing.
+
+How it Works:
+--------------
+Starts a timer whenever the function is called.
+Cancels the previous timer if the function is invoked again before the timer completes.
+Executes the function only after the timer expires without interruptions.
+
+
+Use Case Scenarios:
+--------------------
+Search Box Auto-Suggestions: To reduce the number of API calls as the user types.
+Window Resize Events: To avoid continuous calculations during resizing.
+Form Validations on Key Presses: To validate input after the user stops typing.
+
+//////////////////////////////////////////////////////////////////////////////////
+
+Throttle
+=========
+Definition: 
+------------
+A technique to ensure a function is executed at most once every specified time interval.
+
+Purpose: 
+---------
+To control the rate of function execution for high-frequency events, ensuring periodic execution.
+
+How it Works:
+--------------
+Maintains a timestamp of the last function call.
+Executes the function immediately if the specified interval has passed since the last call.
+Ignores additional calls until the interval expires.
+
+Use Case Scenarios:
+--------------------
+Scroll Events: To limit DOM calculations or API calls while scrolling.
+Mouse Move Events: To track mouse movements at a consistent rate.
+Button Clicks: To prevent multiple triggers due to rapid clicks.
+
+/////////////////////////////////////////////////////////////////////
+
+Example
+==========
+
+Html
+-----
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <input type="text">
+  <div>
+    <b>Default:</b>
+    <span id="default"></span>
+  </div>
+  <div>
+    <b>Debounce:</b>
+    <span id="debounce"></span>
+  </div>
+  <div>
+    <b>Throttle:</b>
+    <span id="throttle"></span>
+  </div>
+</body>
+</html>
+
+Javascript
+-----------
+
+const input = document.querySelector("input")
+const defaultText = document.getElementById("default")
+const debounceText = document.getElementById("debounce")
+const throttleText = document.getElementById("throttle")
+
+const updateDebounceText = debounce(() => {
+  incrementCount(debounceText)
+})
+const updateThrottleText = throttle(() => {
+  incrementCount(throttleText)
+}, 1000)
+
+function debounce(cb, delay = 1000) {
+  let timeout
+
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      cb()
+    }, delay)
+  }
+}
+
+function throttle(cb, delay = 1000) {
+  let shouldWait = false
+  let waitingArgs
+  const timeoutFunc = () => {
+    if (waitingArgs == null) {
+      shouldWait = false
+    } else { 
+      cb(...waitingArgs)
+      waitingArgs = null
+      setTimeout(timeoutFunc, delay)
+    }
+  }
+
+  return (...args) => {
+    if (shouldWait) {
+      waitingArgs = args
+      return
+    }
+    
+    cb(...args)
+    shouldWait = true
+
+    setTimeout(timeoutFunc, delay)
+  }
+}
+
+document.addEventListener("mousemove", e => {
+  incrementCount(defaultText);
+  updateDebounceText();
+  updateThrottleText();
+})
+
+function incrementCount(element) {
+  element.textContent = (parseInt(element.innerText) || 0) + 1
+}
