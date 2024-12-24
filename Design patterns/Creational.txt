@@ -1,0 +1,6 @@
+There are mainly 4 types of Creational design patterns.
+1. Factory method
+2. Abstract factory
+3. Builder
+4. Prototype
+5. Singleton
