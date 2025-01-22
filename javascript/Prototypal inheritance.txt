@@ -8,3 +8,5 @@ We’d like to reuse what we have in user, not copy/reimplement its methods, jus
 --> In JavaScript, objects have a special hidden property [[Prototype]] (as named in the specification), 
     that is either null or references another object. That object is called “a prototype”:
 --> __proto__ is the property that every object have. Using this object we can get or set the parent object.
+--> Prototype: A blueprint for objects.
+--> __proto__: A reference to the blueprint that the object uses for inheritance.

@@ -1,6 +1,33 @@
 There are mainly 4 types of Creational design patterns.
 1. Factory method
+=================
+The Factory Pattern is a creational design pattern that provides an interface for creating objects, but allows subclasses or specific implementations to decide which class to instantiate. 
+Instead of creating objects directly using a constructor, a factory method is used to create objects, which helps in abstracting the creation logic and promotes loose coupling.
+In simpler terms, the Factory Pattern acts as a central point for creating objects, ensuring that object creation is controlled and the client code doesn’t need to know the details of how an object is created.
+
 2. Abstract factory
+===================
+The Abstract Factory design pattern provides an interface for creating families of related objects, without specifying their concrete classes. 
+It allows you to create products (like chairs, tables, etc.) that belong to the same family (like modern or vintage) through a common interface, ensuring that the products are compatible with each other.
+In simpler terms, it’s like a furniture store offering different sets of furniture styles (modern, vintage) where each style comes with its own set of matching products (chairs, tables, etc.), and the store’s factory makes sure you get the right set when you choose a style.
+
 3. Builder
+==========
+The Builder design pattern is a pattern used to create complex objects by breaking down the process into smaller, manageable steps. 
+It allows you to construct an object step by step and provides flexibility in customizing the object by adding or modifying its parts without needing to understand the whole construction process.
+
 4. Prototype
+=============
+The Prototype Design Pattern is a creational pattern that creates new objects by cloning an existing object instead of building from scratch. 
+This is useful for resource-intensive or complex object initialization.(Shallow cloning and deep cloning are 2 types of cloning)
+
 5. Singleton
+=============
+A Singleton Class is a design pattern in which a class is restricted to having only one instance throughout the application's lifetime. 
+It provides a global access point to this instance, ensuring controlled access and efficient resource usage. 
+The singleton pattern typically involves:
+
+A private constructor to prevent external instantiation.
+A static method or property to provide access to the single instance.
+A static variable to hold the single instance, initialized lazily or eagerly as needed.
+This pattern is often used in scenarios where centralized management of resources, such as configuration settings, logging, or database connections, is required.
